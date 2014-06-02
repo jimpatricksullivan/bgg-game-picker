@@ -1,0 +1,10 @@
+{
+  "name": "application",
+  "version": "0.0.0",
+  "dependencies": {
+    "requirejs": "~2.1.6",
+    "underscore": "~1.4.4",
+    "backbone.marionette": "~1.0.3",
+    "backbone.localStorage": "~1.1.4"
+  }
+}
