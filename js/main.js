@@ -2,33 +2,35 @@
 
 require.config({
 	paths: {
+        handlebars: '../bower_components/handlebars/handlebars',
+        text: '../bower_components/text/text',
 		underscore: '../bower_components/underscore/underscore',
 		backbone: '../bower_components/backbone/backbone',
 		marionette: '../bower_components/backbone.marionette/lib/backbone.marionette',
-		jquery: '../bower_components/jquery/jquery',
+		jquery: '../bower_components/jquery/dist/jquery',
 		localStorage: '../bower_components/backbone.localStorage/backbone.localStorage',
 		tpl: 'lib/tpl',
 
         /* Foundation */
-        'foundation.core': 'lib/foundation/foundation',
-        'foundation.abide': 'lib/foundation/foundation.abide',
-        'foundation.accordion': 'lib/foundation/foundation.accordion',
-        'foundation.alert': 'lib/foundation/foundation.alert',
-        'foundation.clearing': 'lib/foundation/foundation.clearing',
-        'foundation.dropdown': 'lib/foundation/foundation.dropdown',
-        'foundation.equalizer': 'lib/foundation/foundation.equalizer',
-        'foundation.interchange': 'lib/foundation/foundation.interchange',
-        'foundation.joyride': 'lib/foundation/foundation.joyride',
-        'foundation.magellan': 'lib/foundation/foundation.magellan',
-        'foundation.offcanvas': 'lib/foundation/foundation.offcanvas',
-        'foundation.orbit': 'lib/foundation/foundation.orbit',
-        'foundation.reveal': 'lib/foundation/foundation.reveal',
-        'foundation.tab': 'lib/foundation/foundation.tab',
-        'foundation.tooltip': 'lib/foundation/foundation.tooltip',
-        'foundation.topbar': 'lib/foundation/foundation.topbar',
-        'fastclick': 'lib/foundation-dependencies/fastclick',
-        'modernizr': 'lib/foundation-dependencies/modernizr',
-        'placeholder': 'lib/foundation-dependencies/placeholder'
+        'foundation.core': '../bower_components/foundation/js/foundation/foundation',
+        'foundation.abide': '../bower_components/foundation/js/foundation/foundation.abide',
+        'foundation.accordion': '../bower_components/foundation/js/foundation/foundation.accordion',
+        'foundation.alert': '../bower_components/foundation/js/foundation/foundation.alert',
+        'foundation.clearing': '../bower_components/foundation/js/foundation/foundation.clearing',
+        'foundation.dropdown': '../bower_components/foundation/js/foundation/foundation.dropdown',
+        'foundation.equalizer': '../bower_components/foundation/js/foundation/foundation.equalizer',
+        'foundation.interchange': '../bower_components/foundation/js/foundation/foundation.interchange',
+        'foundation.joyride': '../bower_components/foundation/js/foundation/foundation.joyride',
+        'foundation.magellan': '../bower_components/foundation/js/foundation/foundation.magellan',
+        'foundation.offcanvas': '../bower_components/foundation/js/foundation/foundation.offcanvas',
+        'foundation.orbit': '../bower_components/foundation/js/foundation/foundation.orbit',
+        'foundation.reveal': '../bower_components/foundation/js/foundation/foundation.reveal',
+        'foundation.tab': '../bower_components/foundation/js/foundation/foundation.tab',
+        'foundation.tooltip': '../bower_components/foundation/js/foundation/foundation.tooltip',
+        'foundation.topbar': '../bower_components/foundation/js/foundation/foundation.topbar',
+        'fastclick': '../bower_components/foundation/js/vendor/fastclick',
+        'modernizr': '../bower_components/foundation/js/vendor/modernizr',
+        'placeholder': '../bower_components/foundation/js/vendor/placeholder'
 	},
 
 	shim: {
@@ -145,8 +147,19 @@ require.config({
         },
         'placeholder': {
             exports: 'Placeholders'
+        },
+        handlebars: {
+            exports: 'Handlebars'
         }
 	},
+
+    packages: [
+        {
+            name: 'hbs',
+            location: '../bower_components/requirejs-hbs',
+            main: 'hbs'
+        }
+    ],
 
 	deps: ['jquery', 'underscore']
 });
@@ -156,7 +169,8 @@ require([
 	'backbone',
     'jquery',
 	'routers/index',
-	'controllers/index'
+	'controllers/index',
+    'foundation.core'
 ], function (app, Backbone, $, Router, Controller) {
 	'use strict';
     $(document).foundation({});

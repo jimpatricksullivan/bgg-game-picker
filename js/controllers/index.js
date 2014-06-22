@@ -1,11 +1,15 @@
 define([
-	'app'
-], function (app) {
+	'app',
+    '../views/SomeView'
+], function (app, SomeView) {
 	'use strict';
 
 	return {
         anyRoute: function (param) {
-            console.log('routed');
+            var view = new SomeView({
+                el: $('body')
+            });
+            view.render();
 		}
 	};
 });
