@@ -8,6 +8,8 @@
         "requirejs-hbs":  null,
         "backbone.marionette": "v2.0.0-pre.2",
         "backbone.localStorage": "~1.1.4",
-        "foundation": "~5.2.2"
+        "foundation": "~5.2.2",
+        "mocha": null,
+        "chai": null
     }
 }
