@@ -2,8 +2,8 @@
 require([
     'mocha',
     'chai',
-    'collections/GameCollectionTests'
-], function (Mocha, Chai, GameCollectionTests) {
+    '../test/collections/OwnedGameCollectionTests'
+], function (Mocha, Chai, OwnedGameCollectionTests) {
     'use strict';
 
     // get ready to add some tests
@@ -11,7 +11,7 @@ require([
     Chai.should();
 
     // add some tests
-    GameCollectionTests.addTests();
+    OwnedGameCollectionTests.addTests();
 
     // run the tests
     Mocha.run();
