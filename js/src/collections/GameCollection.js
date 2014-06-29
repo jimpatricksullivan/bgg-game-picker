@@ -17,7 +17,7 @@ define([
 
         model: GameModel,
 
-        URL_ROOT: "http://bgg-api.herokuapp.com/api/v1/collection?",
+        URL_ROOT: "http://bgg-api.herokuapp.com/api/v1/collection?own=1&stats=1",
 
         // the time in milliseconds to wait between fetch attempts
         PAUSE_BETWEEN_FETCHES: 3000,
@@ -30,7 +30,7 @@ define([
 
         url: function() {
             return this.URL_ROOT +
-                "username=" + this.username +
+                "&username=" + this.username +
                 "&attempt=" + this.fetchAttemptCounter;
         },
 

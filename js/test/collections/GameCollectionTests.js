@@ -2,14 +2,14 @@
 define([
     'mocha',
     'chai',
-    'collections/OwnedGameCollection'
+    'collections/GameCollection'
 ], function (Mocha, Chai, GameCollection) {
     'use strict';
 
     return {
         addTests: function() {
 
-            describe("OwnedGameCollection", function () {
+            describe("GameCollection", function () {
 
                 var collection;
                 beforeEach(function(){
@@ -31,14 +31,14 @@ define([
 
                     beforeEach(function () {
                         // the first two responses have no items
-                        fakeServer.respondWith(collection.URL_ROOT + "username=someUser&attempt=1",
+                        fakeServer.respondWith(collection.URL_ROOT + "&username=someUser&attempt=1",
                             [200, { "Content-Type": "application/json" },
                                 '{}']);
-                        fakeServer.respondWith(collection.URL_ROOT + "username=someUser&attempt=2",
+                        fakeServer.respondWith(collection.URL_ROOT + "&username=someUser&attempt=2",
                             [200, { "Content-Type": "application/json" },
                                 '{}']);
                         // the third one has items
-                        fakeServer.respondWith(collection.URL_ROOT + "username=someUser&attempt=3",
+                        fakeServer.respondWith(collection.URL_ROOT + "&username=someUser&attempt=3",
                             [200, { "Content-Type": "application/json" },
                                 '{ "items": 12 }']);
                     });
