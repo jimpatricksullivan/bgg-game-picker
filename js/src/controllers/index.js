@@ -9,9 +9,9 @@ define([
         anyRoute: function (param) {
             var gameCollection = new GameCollection([], {username: 'kform'} );
             $.when( gameCollection.fetchWithRetries() ).done(
-                function() {
-                    console.log("game collection finished fetching");
-                    debugger;
+                function(collection) {
+                    console.log("collection fetched with length: " + collection.length);
+                    window.gc = collection;
                 }
             );
 		}
