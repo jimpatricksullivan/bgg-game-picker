@@ -2,18 +2,20 @@
 
 define([
 	'marionette',
-    'views/HeaderView'
-], function (Marionette, HeaderView) {
+    'models/CriteriaModel',
+    'views/MainView'
+], function (Marionette, CriteriaModel, MainView) {
 	'use strict';
 
 	var app = new Marionette.Application();
+    app.criteria = new CriteriaModel();
 
-	app.addRegions({
-		header: '#header',
-		main: '#main'
-	});
-
-    app.header.show(new HeaderView());
-
+    app.addRegions({
+        main: '#main'
+    });
+    app.main.show(new MainView({
+        eventBus: app.vent,
+        criteria: app.criteria
+    }));
 	return window.app = app;
 });
