@@ -10,7 +10,7 @@ define([
     return Marionette.LayoutView.extend({
         template: template,
 
-        onShow: function () {
+        initialize: function() {
             this.headerView = new HeaderView();
             this.formView = new FormView({
                 model: Marionette.getOption(this, 'criteria')
@@ -19,6 +19,10 @@ define([
                 header: '#header',
                 body: '#body'
             });
+            // listen for events from the form
+        },
+
+        onShow: function () {
             this.header.show(this.headerView);
             this.body.show(this.formView);
         }
