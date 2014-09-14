@@ -1,3 +1,8 @@
 #body {
     padding: 20px;
 }
+
+select {
+    display: block;
+    margin-bottom: 16px;
+}
