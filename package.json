@@ -1,0 +1,13 @@
+{
+  "name": "bgg-game-picker",
+  "description": "A toy app for choosing a random game from a boardgamegeek.com game collection",
+  "version": "0.0.1",
+  "repository": "https://github.com/jimpatricksullivan/bgg-game-picker",
+  "dependencies": {
+    "koa": "^0.8.0",
+    "koa-logger": "^1.2.1",
+    "koa-route": "^1.1.4",
+    "koa-static": "^1.4.5",
+    "bluebird": "^2.3.4"
+  }
+}
