@@ -7,12 +7,10 @@ var bggApiUtil = require('./BggApiUtil.js');
 var app = koa();
 app.use(logger());
 
-app.use(serveStatic(__dirname + '/public'));
+app.use(serveStatic(__dirname + '/public/'));
 
 app.use(route.get('/games', function *() {
-    yield bggApiUtil.getGameCollection();
-    debugger;
-    //this.body = JSON.stringify({something:1,somethingElse:"whatevs"});
+    yield bggApiUtil.getGameCollection(this);
 }));
 
 app.listen(8000);
