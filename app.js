@@ -10,7 +10,9 @@ app.use(logger());
 app.use(serveStatic(__dirname + '/public/'));
 
 app.use(route.get('/games', function *() {
-    yield bggApiUtil.getGameCollection(this);
+    var apiResponse = yield bggApiUtil.getGameCollection();
+    this.statusCode = apiResponse.statusCode;
+    this.body = apiResponse.body;
 }));
 
 app.listen(8000);
