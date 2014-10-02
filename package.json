@@ -9,6 +9,8 @@
     "koa-logger": "^1.2.1",
     "koa-route": "^1.1.4",
     "koa-static": "^1.4.5",
-    "bluebird": "^2.3.4"
+    "bluebird": "^2.3.4",
+    "when": "^3.5.0",
+    "underscore": "^1.7.0"
   }
 }
