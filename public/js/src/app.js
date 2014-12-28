@@ -13,7 +13,7 @@ define([
 
     // create data models
     var criteria = new CriteriaModel();
-    app.collection = new GameCollection([], {criteria: criteria});
+    var gameCollection = new GameCollection([], {criteria: criteria});
 
     // setup and show regions
     app.addRegions({
@@ -21,7 +21,8 @@ define([
     });
     app.main.show(new MainView({
         eventBus: app.vent,
-        criteria: criteria
+        criteria: criteria,
+        gameCollection: gameCollection
     }));
 
 	return window.app = app;

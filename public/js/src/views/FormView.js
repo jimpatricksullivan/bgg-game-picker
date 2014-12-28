@@ -18,7 +18,11 @@ define([
             "click @ui.submitButton": "submit"
         },
 
-        onRender: function() {window.form = this;
+        initialize: function(options) {
+            this.collection = options.collection;
+        },
+
+        onRender: function() {
             if (!this.notificationView) {
                 this._setupNotification();
             }
