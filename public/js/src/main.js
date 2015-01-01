@@ -9,7 +9,7 @@ require([
 ], function (app, Backbone, $, Router, Controller) {
 	'use strict';
     $(document).foundation({});
-	app.start();
+	window.app.start();
 	new Router({ controller: Controller });
 	Backbone.history.start();
 });

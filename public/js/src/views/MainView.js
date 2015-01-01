@@ -3,44 +3,60 @@
 define([
     'jquery',
     'marionette',
+    'collections/GameCollection',
+    'models/CriteriaModel',
     'views/HeaderView',
     'views/FormView',
-    'views/RandomGameView',
+    'views/GameView',
     'hbs!templates/main',
     'foundation.reveal'
-], function ($, Marionette, HeaderView, FormView, RandomGameView, template) {
+], function (
+    $, Marionette, GameCollection, CriteriaModel, HeaderView, FormView, GameView, template) {
 
     return Marionette.LayoutView.extend({
         template: template,
 
         initialize: function() {
-            this.headerView = new HeaderView();
-            this.formView = new FormView({
-                model: Marionette.getOption(this, 'criteria'),
-                gameCollection: Marionette.getOption(this, 'gameCollection')
-            });
+            this._setupModels();
+            this._setUpViews();
+            this._setupRegions();
+            app.vent.on("revealGame", _.bind(this.revealRandomGame, this));
+        },
 
-            this.randomGameView = new RandomGameView({
-                gameCollection: Marionette.getOption(this, 'gameCollection')
+        _setupModels: function() {
+            this.criteria = new CriteriaModel();
+            this.gameCollection = new GameCollection([]);
+        },
+
+        _setUpViews: function() {
+            this.headerView = new HeaderView();
+            this.gameView = new GameView();
+            this.formView = new FormView({
+                model: this.criteria,
+                gameCollection: this.gameCollection
             });
+        },
+
+        _setupRegions: function() {
             this.addRegions({
                 header: '#header',
                 body: '#body',
                 game: '#modalContents'
             });
-            // listen for events from the form
         },
 
         onShow: function () {
             this.header.show(this.headerView);
             this.body.show(this.formView);
-            this.game.show(this.randomGameView);
+            this.game.show(this.gameView);
             $(document).foundation();
         },
 
-        openModalWithGame: function() {
-            this.randomGameView.render();
-            $('#gameModal').foundation('reveal', 'open');
+        revealRandomGame: function() {
+            this.$('#gameModal').foundation('reveal', 'close');
+            this.gameView.model = this.gameCollection.getRandomGameForCriteria(this.criteria);
+            this.gameView.render();
+            this.$('#gameModal').foundation('reveal', 'open');
         }
     });
 });

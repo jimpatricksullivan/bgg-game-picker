@@ -12,12 +12,7 @@ define([
         model: GameModel,
 
         url: function() {
-            return 'http://localhost:8000/users/' + this.criteria.get('bggUserName') + '/games';
-        },
-
-        initialize: function(models, options) {
-            options = options || {};
-            this.criteria = options.criteria;
+            return 'http://localhost:8000/users/' + this.bggUserName + '/games';
         },
 
         getRandomGameForCriteria: function(criteria) {

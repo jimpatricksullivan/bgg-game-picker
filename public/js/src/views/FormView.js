@@ -11,15 +11,17 @@ define([
         template: template,
 
         ui: {
-            "submitButton": "button"
+            "submitButton": ".button",
+            "username": "#username"
         },
 
         events: {
-            "click @ui.submitButton": "submit"
+            "click @ui.submitButton": "_submit",
+            "change @ui.username": "_onUsernameChange"
         },
 
         initialize: function(options) {
-            this.collection = options.collection;
+            this.gameCollection = options.gameCollection;
         },
 
         onRender: function() {
@@ -29,7 +31,16 @@ define([
             this._updateNotification(this.notificationView.model.get('state'));
         },
 
-        submit: function() {},
+        _submit: function() {
+            //todo protect against submission before the collection is done fetching
+            app.vent.trigger("revealGame");
+        },
+
+        _onUsernameChange: _.debounce(function() {
+            this.model.set('bggUserName', this.ui.username.val());
+            this.gameCollection.bggUserName = this.model.get('bggUserName');
+            this.gameCollection.fetch();
+        }, 300),
 
         _setupNotification: function () {
             var notificationModel = new NotificationModel({

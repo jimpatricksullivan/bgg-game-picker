@@ -18,3 +18,7 @@ select {
     display: block;
     margin-bottom: 16px;
 }
+
+img {
+    max-height: 500px;
+}
