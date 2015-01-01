@@ -2,7 +2,7 @@
     <div class="row">
         <div class="large-6 columns">
             <label>BoardGameGeek Username
-                <input type="text" id="username" placeholder="" />
+                <input type="text" data-model-attribute="bggUserName" placeholder="" />
             </label>
         </div>
         <div class="large-6 columns" id="top-notification"></div>
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="large-6 columns">
             <label>Min Length
-                <select>
+                <select data-model-attribute="minTime">
                     <option selected value="5">5 minutes</option>
                     <option value="15">15 minutes</option>
                     <option value="30">30 minutes</option>
@@ -18,15 +18,15 @@
                     <option value="60">1 hour</option>
                     <option value="90">90 minutes</option>
                     <option value="120">2 hours</option>
-                    <option value="280">3 hours</option>
+                    <option value="180">3 hours</option>
                     <option value="240">4 hours</option>
                     <option value="480">8 hours</option>
                 </select>
             </label>
         </div>
         <div class="large-6 columns">
-            <label>Min Length
-                <select>
+            <label>Max Length
+                <select data-model-attribute="maxTime">
                     <option value="5">5 minutes</option>
                     <option value="15">15 minutes</option>
                     <option value="30">30 minutes</option>
@@ -44,16 +44,17 @@
     <div class="row">
         <div class="large-4 columns">
             <label># of Players
-                <input type="text" placeholder="any" />
+                <input data-model-attribute="numberOfPlayers" type="text" placeholder="any" />
             </label>
         </div>
         <div class="large-4 columns">
             <label>Min User Rating
-                <input type="text" placeholder="0" />
+                <input data-model-attribute="minRating" type="text" placeholder="0" />
             </label>
         </div>
         <div class="large-4 columns" style="margin-top:25px">
-            <input id="checkbox1" checked type="checkbox"><label for="checkbox1">include unranked</label>
+            <input data-model-attribute="includeUnrated" id="checkbox1" checked type="checkbox">
+            <label for="checkbox1">include unranked</label>
         </div>
     </div>
     <div class="row">

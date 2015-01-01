@@ -25,7 +25,11 @@ define([
         },
 
         higherUserRatingThan: function(rating) {
-            return this.get('userRating') >= rating && this.get('userRating') !== 255;
+            return !this.hasUserRating() || this.get('userRating') >= rating;
+        },
+
+        hasUserRating: function() {
+            return this.get('userRating') !== null;
         },
 
         higherAverageRatingThan: function(rating) {

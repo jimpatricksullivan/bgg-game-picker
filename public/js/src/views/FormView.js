@@ -1,24 +1,28 @@
 /*global define */
 define([
+    'jquery',
     'underscore',
     'marionette',
     'views/NotificationView',
     'models/NotificationModel',
+    'models/CriteriaModel',
     'hbs!templates/form'
-], function (_, Marionette, NotificationView, NotificationModel, template) {
+], function ($, _, Marionette, NotificationView, NotificationModel, CriteriaModel, template) {
     'use strict';
 
     return Marionette.ItemView.extend({
         template: template,
 
         ui: {
-            "submitButton": ".button",
-            "username": "#username"
+            submitButton: '.button',
+            username: '[data-model-attribute="bggUserName"]',
+            attributeField: '[data-model-attribute]'
         },
 
         events: {
             "click @ui.submitButton": "_submit",
-            "change @ui.username": "_onUsernameChange"
+            "change @ui.username": "_onUsernameChange",
+            "change @ui.attributeField": "_onFieldChange"
         },
 
         initialize: function(options) {
@@ -38,6 +42,7 @@ define([
             if (this.gameCollectionFetchPromise) {
                 if (this.gameCollectionFetchPromise.state() === 'pending') {
                     this._updateNotification(NotificationModel.states.STILL_FETCHING);
+                    this.$('a').disable();
                 }
                 this.gameCollectionFetchPromise.then(function() {
                     app.vent.trigger("revealGame");
@@ -50,7 +55,6 @@ define([
 
         _onUsernameChange: _.debounce(function() {
             var self = this;
-            this.model.set('bggUserName', this.ui.username.val());
             this.gameCollection.bggUserName = this.model.get('bggUserName');
             this.gameCollectionFetchPromise = this.gameCollection.fetch();
             this.gameCollectionFetchPromise.then(function() {
@@ -58,6 +62,18 @@ define([
             });
             this._updateNotification(NotificationModel.states.FETCHING);
         }, 300),
+
+        _onFieldChange: function(event) {
+            var fieldElement = $(event.target);
+            var modelAttribute = fieldElement.attr('data-model-attribute');
+            var value = fieldElement.val();
+            if (_.contains(CriteriaModel.numericFields, modelAttribute)) {
+                value = parseInt(value, 10);
+            } else if (fieldElement.attr('type') === 'checkbox') {
+                value = fieldElement.prop('checked') ? true : false;
+            }
+            this.model.set(modelAttribute, value);
+        },
 
         _setupNotification: function () {
             var notificationModel = new NotificationModel({

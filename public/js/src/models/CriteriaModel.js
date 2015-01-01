@@ -13,5 +13,12 @@ define([
             minRating: 0,
             includeUnrated: true
         }
-    })
+    }, {
+        numericFields: [
+            'numberOfPlayers',
+            'minTime',
+            'maxTime',
+            'minRating'
+        ]
+    });
 });

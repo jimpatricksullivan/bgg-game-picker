@@ -18,25 +18,11 @@ define([
         getRandomGameForCriteria: function(criteria) {
             criteria = criteria || {};
             var filteredCollection = this.filter(function(game){
-                if (criteria.yearsOld && game.isOlderThan(criteria.yearsOld)) {
-                    return false;
-                }
-                if (criteria.playerCount && !game.playsWithPlayerCount(criteria.playerCount)) {
-                    return false;
-                }
-                if (criteria.minLength && !game.gameLongerThan(criteria.minLength)) {
-                    return false;
-                }
-                if (criteria.maxLength && !game.gameShorterThan(criteria.maxLength)) {
-                    return false;
-                }
-                if (criteria.minUserRating && !game.higherUserRatingThan(criteria.minUserRating)) {
-                    return false;
-                }
-                if (criteria.minAverageRating && !game.higherAverageRatingThan(criteria.minAverageRating)) {
-                    return false;
-                }
-                return true;
+                return (!criteria.get('numberOfPlayers') || game.playsWithPlayerCount(criteria.get('numberOfPlayers'))) &&
+                       (!criteria.get('minTime') || game.gameLongerThan(criteria.get('minTime'))) &&
+                       (!criteria.get('maxTime') || game.gameShorterThan(criteria.get('maxTime'))) &&
+                       (!criteria.get('minRating') || game.higherUserRatingThan(criteria.get('minRating'))) &&
+                       (criteria.get('includeUnrated') || game.hasUserRating());
             });
 
             var randomGameIndex = _.random(0, filteredCollection.length - 1);
