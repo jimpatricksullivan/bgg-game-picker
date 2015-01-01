@@ -1,10 +1,11 @@
 /*global define */
 define([
+    'underscore',
     'marionette',
     'views/NotificationView',
     'models/NotificationModel',
     'hbs!templates/form'
-], function (Marionette, NotificationView, NotificationModel, template) {
+], function (_, Marionette, NotificationView, NotificationModel, template) {
     'use strict';
 
     return Marionette.ItemView.extend({
@@ -22,6 +23,7 @@ define([
 
         initialize: function(options) {
             this.gameCollection = options.gameCollection;
+            this.gameCollectionFetchPromise = null;
         },
 
         onRender: function() {
@@ -31,15 +33,30 @@ define([
             this._updateNotification(this.notificationView.model.get('state'));
         },
 
-        _submit: function() {
-            //todo protect against submission before the collection is done fetching
-            app.vent.trigger("revealGame");
-        },
+        _submit: _.debounce(function() {
+            var self = this;
+            if (this.gameCollectionFetchPromise) {
+                if (this.gameCollectionFetchPromise.state() === 'pending') {
+                    this._updateNotification(NotificationModel.states.STILL_FETCHING);
+                }
+                this.gameCollectionFetchPromise.then(function() {
+                    app.vent.trigger("revealGame");
+                    self._updateNotification();
+                });
+            } else {
+                //todo show error about no username being entered yet
+            }
+        }, 200),
 
         _onUsernameChange: _.debounce(function() {
+            var self = this;
             this.model.set('bggUserName', this.ui.username.val());
             this.gameCollection.bggUserName = this.model.get('bggUserName');
-            this.gameCollection.fetch();
+            this.gameCollectionFetchPromise = this.gameCollection.fetch();
+            this.gameCollectionFetchPromise.then(function() {
+                self._updateNotification(NotificationModel.states.DONE_FETCHING);
+            });
+            this._updateNotification(NotificationModel.states.FETCHING);
         }, 300),
 
         _setupNotification: function () {
@@ -54,13 +71,15 @@ define([
 
         _updateNotification: function(state) {
             this.notificationView.$el.empty();
-            if (state === NotificationModel.states.STILL_FETCHING) {
-                this.notificationView.setElement(this.$('#bottom-notification'));
-            } else {
-                this.notificationView.setElement(this.$('#top-notification'));
+            if (state) {
+                if (state === NotificationModel.states.STILL_FETCHING) {
+                    this.notificationView.setElement(this.$('#bottom-notification'));
+                } else {
+                    this.notificationView.setElement(this.$('#top-notification'));
+                }
+                this.notificationView.updateState(state, this.model.get('bggUserName'));
+                this.notificationView.render();
             }
-            this.notificationView.updateState(state, this.model.get('bggUserName'));
-            this.notificationView.render();
         }
     })
 });
