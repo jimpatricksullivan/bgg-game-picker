@@ -16,5 +16,7 @@ app.use(route.get('/users/:name/games', function *(username) {
     this.set('Content-Type', 'application/json');
 }));
 
-app.listen(8000);
-console.log('listening on port 8000');
+var port = process.env.PORT || 8000;
+
+app.listen(port);
+console.log('listening on port ' + port);
