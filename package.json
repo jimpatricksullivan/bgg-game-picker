@@ -16,5 +16,12 @@
   "devDependencies": {
     "gulp": "^3.8.8",
     "gulp-bower": "0.0.6"
+  },
+  "main": "app.js",
+  "scripts": {
+      "start": "node --harmony --use_strict --harmony_generators app.js"
+  },
+  "engines": {
+      "node": "^0.11.9"
   }
 }
