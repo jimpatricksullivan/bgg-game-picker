@@ -3,11 +3,12 @@ define([
     'jquery',
     'underscore',
     'marionette',
+    'backbone.radio',
     'views/NotificationView',
     'models/NotificationModel',
     'models/CriteriaModel',
     'hbs!templates/form'
-], function ($, _, Marionette, NotificationView, NotificationModel, CriteriaModel, template) {
+], function ($, _, Marionette, Radio, NotificationView, NotificationModel, CriteriaModel, template) {
     'use strict';
 
     return Marionette.ItemView.extend({
@@ -45,7 +46,8 @@ define([
                     this.$('a').disable();
                 }
                 this.gameCollectionFetchPromise.then(function() {
-                    app.vent.trigger("revealGame");
+                    var channel = Radio.channel('app');
+                    channel.trigger("revealGame");
                     self._updateNotification();
                 });
             } else {

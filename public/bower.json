@@ -10,6 +10,7 @@
         "backbone.localStorage": "~1.1.4",
         "foundation": "~5.2.2",
         "mocha": null,
-        "chai": null
+        "chai": null,
+        "backbone.radio": null
     }
 }

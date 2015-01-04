@@ -9,6 +9,7 @@ var require = {
         localStorage: '../../bower_components/backbone.localStorage/backbone.localStorage',
         mocha: '../../bower_components/mocha/mocha',
         chai: '../../bower_components/chai/chai',
+        "backbone.radio": "../../bower_components/backbone.radio/build/backbone.radio",
 
         /* Foundation */
         'foundation.core': '../../bower_components/foundation/js/foundation/foundation',

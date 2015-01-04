@@ -1,15 +1,16 @@
 /*global require */
 require([
-	'app',
 	'backbone',
     'jquery',
-	'routers/index',
-	'controllers/index',
+	'views/MainView',
     'foundation.core'
-], function (app, Backbone, $, Router, Controller) {
+], function (Backbone, $, MainView) {
 	'use strict';
+
+	var mainView = new MainView({
+		el: $('#main')
+	});
+	mainView.render();
+	mainView.onShow();
     $(document).foundation({});
-	window.app.start();
-	new Router({ controller: Controller });
-	Backbone.history.start();
 });

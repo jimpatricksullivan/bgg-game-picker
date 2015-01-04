@@ -3,6 +3,7 @@
 define([
     'jquery',
     'marionette',
+    'backbone.radio',
     'collections/GameCollection',
     'models/CriteriaModel',
     'views/HeaderView',
@@ -11,7 +12,7 @@ define([
     'hbs!templates/main',
     'foundation.reveal'
 ], function (
-    $, Marionette, GameCollection, CriteriaModel, HeaderView, FormView, GameView, template) {
+    $, Marionette, Radio, GameCollection, CriteriaModel, HeaderView, FormView, GameView, template) {
 
     return Marionette.LayoutView.extend({
         template: template,
@@ -20,7 +21,8 @@ define([
             this._setupModels();
             this._setUpViews();
             this._setupRegions();
-            app.vent.on("revealGame", _.bind(this.revealRandomGame, this));
+            var channel = Radio.channel('app');
+            channel.on('revealGame', _.bind(this.revealRandomGame, this));
         },
 
         _setupModels: function() {
