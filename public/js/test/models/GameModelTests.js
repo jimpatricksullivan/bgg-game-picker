@@ -2,14 +2,14 @@
 define([
     'mocha',
     'chai',
-    'collections/GameCollection'
-], function (Mocha, Chai, GameCollection) {
+    'models/GameModel'
+], function (Mocha, Chai, GameModel) {
     'use strict';
 
     return {
         addTests: function() {
 
-            describe("GameCollection", function () {
+            describe("GameModel", function () {
                 it("has a dummy test", function() {});
             });
         }

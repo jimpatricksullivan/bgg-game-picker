@@ -2,8 +2,22 @@
 require([
     'mocha',
     'chai',
-    '../test/collections/GameCollectionTests'
-], function (Mocha, Chai, GameCollectionTests) {
+    '../test/integration/IntegrationTests',
+    '../test/collections/GameCollectionTests',
+    '../test/models/GameModelTests',
+    '../test/views/FormViewTests',
+    '../test/views/MainViewTests',
+    '../test/views/NotificationViewTests'
+], function (
+    Mocha,
+    Chai,
+    IntegrationTests,
+    GameCollectionTests,
+    GameModelTests,
+    FormViewTests,
+    MainViewTests,
+    NotificationViewTests
+) {
     'use strict';
 
     // get ready to add some tests
@@ -11,7 +25,12 @@ require([
     Chai.should();
 
     // add some tests
+    IntegrationTests.addTests();
     GameCollectionTests.addTests();
+    GameModelTests.addTests();
+    FormViewTests.addTests();
+    MainViewTests.addTests();
+    NotificationViewTests.addTests();
 
     // run the tests
     Mocha.run();

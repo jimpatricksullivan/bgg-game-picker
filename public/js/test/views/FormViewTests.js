@@ -2,14 +2,14 @@
 define([
     'mocha',
     'chai',
-    'collections/GameCollection'
-], function (Mocha, Chai, GameCollection) {
+    'views/FormView'
+], function (Mocha, Chai, FormView) {
     'use strict';
 
     return {
         addTests: function() {
 
-            describe("GameCollection", function () {
+            describe("FormView", function () {
                 it("has a dummy test", function() {});
             });
         }
