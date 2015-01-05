@@ -7,7 +7,7 @@ define([
     return Backbone.Model.extend({
         defaults: {
             bggUserName: '',
-            numberOfPlayers: 'any',
+            numberOfPlayers: null,
             minTime: 0,
             maxTime: 480,
             minRating: 0,

@@ -6,12 +6,6 @@ define([
 
     return Backbone.Model.extend({
 
-        isOlderThan: function(age) {
-            var currentYear = new Date().getFullYear();
-            var minimumYear = currentYear - age;
-            return this.get('yearPublished') < minimumYear;
-        },
-
         playsWithPlayerCount: function(playerCount) {
             return playerCount <= this.get('maxPlayers') && playerCount >= this.get('minPlayers')
         },
@@ -30,10 +24,6 @@ define([
 
         hasUserRating: function() {
             return this.get('userRating') !== null;
-        },
-
-        higherAverageRatingThan: function(rating) {
-            return this.get('averageRating') >= rating && this.get('averageRating') !== 255;
         }
     })
 });

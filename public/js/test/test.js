@@ -4,7 +4,6 @@ require([
     'chai',
     '../test/integration/IntegrationTests',
     '../test/collections/GameCollectionTests',
-    '../test/models/GameModelTests',
     '../test/views/FormViewTests',
     '../test/views/MainViewTests',
     '../test/views/NotificationViewTests'
@@ -13,7 +12,6 @@ require([
     Chai,
     IntegrationTests,
     GameCollectionTests,
-    GameModelTests,
     FormViewTests,
     MainViewTests,
     NotificationViewTests
@@ -27,7 +25,6 @@ require([
     // add some tests
     IntegrationTests.addTests();
     GameCollectionTests.addTests();
-    GameModelTests.addTests();
     FormViewTests.addTests();
     MainViewTests.addTests();
     NotificationViewTests.addTests();
