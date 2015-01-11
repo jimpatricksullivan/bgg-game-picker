@@ -10,11 +10,11 @@ require([
 ], function (
     Mocha,
     Chai,
-    IntegrationTests,
-    GameCollectionTests,
-    FormViewTests,
-    MainViewTests,
-    NotificationViewTests
+    integrationTests,
+    gameCollectionTests,
+    formViewTests,
+    mainViewTests,
+    notificationViewTests
 ) {
     'use strict';
 
@@ -23,11 +23,11 @@ require([
     Chai.should();
 
     // add some tests
-    IntegrationTests.addTests();
-    GameCollectionTests.addTests();
-    FormViewTests.addTests();
-    MainViewTests.addTests();
-    NotificationViewTests.addTests();
+    integrationTests();
+    gameCollectionTests();
+    formViewTests();
+    mainViewTests();
+    notificationViewTests();
 
     // run the tests
     Mocha.run();

@@ -6,12 +6,9 @@ define([
 ], function (Mocha, Chai, MainView) {
     'use strict';
 
-    return {
-        addTests: function() {
-
-            describe("MainView", function () {
-                it("has a dummy test", function() {});
-            });
-        }
+    return function() {
+        describe("MainView", function () {
+            it("has a dummy test", function() {});
+        });
     };
 });

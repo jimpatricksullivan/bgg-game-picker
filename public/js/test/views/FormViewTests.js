@@ -6,12 +6,9 @@ define([
 ], function (Mocha, Chai, FormView) {
     'use strict';
 
-    return {
-        addTests: function() {
-
-            describe("FormView", function () {
-                it("has a dummy test", function() {});
-            });
-        }
+    return function() {
+        describe("FormView", function () {
+            it("has a dummy test", function() {});
+        });
     };
 });
