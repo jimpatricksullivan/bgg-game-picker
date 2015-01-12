@@ -11,6 +11,7 @@
         "foundation": "~5.2.2",
         "mocha": null,
         "chai": null,
-        "backbone.radio": null
+        "backbone.radio": null,
+        "when": null
     }
 }

@@ -10,6 +10,7 @@ var require = {
         mocha: '../../bower_components/mocha/mocha',
         chai: '../../bower_components/chai/chai',
         "backbone.radio": "../../bower_components/backbone.radio/build/backbone.radio",
+        when: '../../bower_components/when/when',
 
         /* Foundation */
         'foundation.core': '../../bower_components/foundation/js/foundation/foundation',
@@ -54,6 +55,10 @@ var require = {
 
         chai: {
             exports: 'chai'
+        },
+
+        when: {
+            exports: 'When'
         },
 
         /* Foundation */
@@ -166,6 +171,10 @@ var require = {
             name: 'hbs',
             location: '../../bower_components/requirejs-hbs',
             main: 'hbs'
+        }, {
+            name: 'when',
+            location: '../../bower_components/when',
+            main: 'when'
         }
     ],
 

@@ -1,10 +1,31 @@
-/*global define, require, describe, beforeEach, it, afterEach, sinon, sinon */
+/*global define, require, describe, beforeEach, it, afterEach, before, after, sinon */
 define([
     'mocha',
     'chai',
-    'views/MainView'
-], function (Mocha, Chai, MainView) {
+    'when',
+    'views/MainView',
+    'foundation.core'
+], function (
+    Mocha,
+    Chai,
+    when,
+    MainView
+) {
     'use strict';
+
+    var waitFor = function(truthTest, callback) {
+        var tries = 0;
+        var timeoutId = setInterval(function() {
+            tries++;
+            if (tries === 10) {
+                clearInterval(timeoutId);
+                throw new Error('This never became true: ' + truthTest.toString());
+            } else if (truthTest()) {
+                callback();
+                clearInterval(timeoutId);
+            }
+        }, 100);
+    };
 
     return function() {
 
@@ -15,7 +36,7 @@ define([
             var fakeServer = sinon.fakeServer.create();
             fakeServer.autoRespond = true;
 
-            beforeEach(function(){
+            before(function(){
 
                 // fake server responses
                 fakeServer.respondWith("/users/kform/games",
@@ -35,14 +56,44 @@ define([
                     el: $('<div></div>')
                 });
                 view.render();
+                view.onShow();
+                view.$el.foundation({});
             });
 
-            afterEach(function () {
+            after(function () {
                 fakeServer.restore();
             });
 
-            it("has a dummy test", function() {
-                Chai.expect(view).to.be.ok();
+            describe("happy path", function() { //todo make this check more stuff
+                it('renders', function (done) {
+                    waitFor(
+                        function() {
+                            return view.$('[data-model-attribute="bggUserName"]').length > 0;
+                        },
+                        done
+                    )
+                });
+
+                it('shows notification that collection is fetched', function (done) {
+                    view.$('[data-model-attribute="bggUserName"]').val('kform').trigger('change');
+                    waitFor(
+                        function() {
+                            return view.$('#top-notification').text().trim() === 'Done fetching kform\'s collection.';
+                        },
+                        done
+                    )
+                });
+
+                it('shows a game', function (done) {
+                    Chai.expect($('#modalContents:visible').length).to.not.be.ok();
+                    view.$('.button').eq(0).click();
+                    waitFor(
+                        function() {
+                            return $('#modalContents:visible').length > 0;
+                        },
+                        done
+                    )
+                });
             });
 
         });
