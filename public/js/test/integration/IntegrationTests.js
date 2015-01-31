@@ -34,7 +34,7 @@ define([
 
             // create a fake server
             var fakeServer = sinon.fakeServer.create();
-            fakeServer.autoRespond = true;
+            fakeServer.autoRespond = false;
 
             before(function(){
 
@@ -64,40 +64,101 @@ define([
                 fakeServer.restore();
             });
 
-            describe("happy path", function() { //todo make this check more stuff
+            describe("happy path", function() {
+
                 it('renders', function (done) {
-                    waitFor(
-                        function() {
-                            return view.$('[data-model-attribute="bggUserName"]').length > 0;
-                        },
-                        done
-                    )
+                    // wait for the form to be rendered
+                    waitFor(function() {
+                        return view.$('[data-model-attribute="bggUserName"]').length > 0;
+                    }, done);
                 });
 
-                it('shows notification that collection is fetched', function (done) {
+                it('shows notification that collection is being fetched', function (done) {
+                    // change username
                     view.$('[data-model-attribute="bggUserName"]').val('kform').trigger('change');
-                    waitFor(
-                        function() {
-                            return view.$('#top-notification').text().trim() === 'Done fetching kform\'s collection.';
-                        },
-                        done
-                    )
+                    // wait for a notification to show up
+                    waitFor(function() {
+                        return view.$('#top-notification').text().trim() === 'Fetching kform\'s collection...';
+                    }, done);
                 });
 
-                it('shows a game', function (done) {
-                    Chai.expect($('#modalContents:visible').length).to.not.be.ok();
-                    view.$('.button').eq(0).click();
-                    waitFor(
-                        function() {
-                            return $('#modalContents:visible').length > 0;
-                        },
-                        done
-                    )
+                it('shows notification that collection was fetched', function (done) {
+                    // Have the server respond
+                    fakeServer.respond();
+                    // wait for the notification to change
+                    waitFor(function() {
+                        return view.$('#top-notification').text().trim() === 'Done fetching kform\'s collection.';
+                    }, done);
                 });
+
+                it('un-checks "include unrated" when minimum rating is entered', function(done) {
+                    //edit all criteria
+                    //expect: include unranked disappears
+                    done();
+                });
+
+                it('picks a game matching criteria', function (done) {
+                    // we shouldn't see a game yet
+                    Chai.expect($('#modalContents:visible').length).to.not.be.ok();
+                    // click submit
+                    view.$('.button').eq(0).click();
+                    // we should see a game
+                    waitFor(function() {
+                        return $('#modalContents:visible').length > 0;
+                    }, done);
+                });
+
+                it('picks another game matching criteria', function (done) {
+                    // click "choose another" or whatevs
+                    // expect: a different game
+                    done();
+                });
+
+                it('only selects games matching criteria', function (done) {
+                    // cheat: check all possible games
+                    done();
+                });
+
+                it('shows another game after closing and changing criteria', function (done) {
+                    // close reveal
+                    // change criteria
+                    // submit
+                    // expect a game to be shown
+                    done();
+                });
+
+                it('only selects games matching new criteria when criteria are changed', function (done) {
+                    // cheat: check all possible games
+                    done();
+                });
+
+                it('can fetch a new collection when the username is changed', function(done) {
+                    // change username
+                    // expect notification
+                    // return xhr
+                    // expect notification change
+                    // cheat: check all possible games
+                    done();
+                })
             });
 
+            describe("User submits before collection xhr finishes", function() {
+                // expect notification to move
+                // return collection
+                // expect game to show
+            });
+
+            describe("User submits before entering a username", function() {
+                // expect error notification
+            });
+
+            describe("Collection returns an error before user submits", function() {
+                // expect error up top
+            });
+
+            describe("Collection returns an error after user submits", function() {
+                // expect error at bottom
+            });
         });
-
     };
-
 });
