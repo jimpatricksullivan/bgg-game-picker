@@ -5,8 +5,12 @@ When complete, this will be a JavaScript application that uses the [boardgamegee
 ##Running this app
 
 This app is built on [Koa](http://koajs.com/), so it requires node 0.11.x. The app can be installed like so:
-```npm install
-gulp```
+```Shell
+npm install
+gulp
+```
 
 And the web server can be started like so:
-```node --harmony app.js```
+```Shell
+node --harmony app.js
+```
