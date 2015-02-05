@@ -33,8 +33,8 @@ define([
 
                 view.revealRandomGame();
 
-                Chai.expect(fakeJqueryElement.foundation.calls[0].args).to.eql(['reveal', 'close']);
-                Chai.expect(fakeJqueryElement.foundation.calls[1].args).to.eql(['reveal', 'open']);
+                Chai.expect(fakeJqueryElement.foundation.getCall(0).args).to.eql(['reveal', 'close']);
+                Chai.expect(fakeJqueryElement.foundation.getCall(1).args).to.eql(['reveal', 'open']);
                 Chai.expect(view.gameView.model).to.eql('fake game model');
                 Chai.expect(view.gameView.render.called).to.be.ok();
             });
