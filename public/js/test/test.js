@@ -21,10 +21,10 @@ require([
     Chai.should();
 
     // add some tests
-    integrationTests();
     gameCollectionTests();
     formViewTests();
     mainViewTests();
+    integrationTests();
 
     // run the tests
     Mocha.run();

@@ -43,7 +43,6 @@ define([
             if (this.gameCollectionFetchPromise) {
                 if (this.gameCollectionFetchPromise.state() === 'pending') {
                     this._updateNotification(NotificationModel.states.STILL_FETCHING);
-                    this.$('a').disable();
                 }
                 this.gameCollectionFetchPromise.then(function() {
                     var channel = Radio.channel('app');
