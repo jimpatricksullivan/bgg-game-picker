@@ -62,7 +62,7 @@ define([
                 self._updateNotification(NotificationModel.states.DONE_FETCHING);
             });
             this._updateNotification(NotificationModel.states.FETCHING);
-        }, 300),
+        },100),
 
         _onFieldChange: function(event) {
             var fieldElement = $(event.target);
@@ -83,7 +83,7 @@ define([
             });
             this.notificationView = new NotificationView({
                 model: notificationModel
-            })
+            });
         },
 
         _updateNotification: function(state) {
@@ -98,5 +98,5 @@ define([
                 this.notificationView.render();
             }
         }
-    })
+    });
 });

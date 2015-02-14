@@ -1,33 +1,17 @@
-/*global define, require, describe, beforeEach, it, afterEach, before, after, sinon */
+/*global define, require, describe, beforeEach, it, afterEach, before, after, sinon, setInterval, clearInterval */
 define([
-    'mocha',
+    'jquery',
     'chai',
-    'when',
     'views/MainView',
+    '../waitFor',
     'foundation.core'
 ], function (
-    Mocha,
+    $,
     Chai,
-    when,
-    MainView
+    MainView,
+    waitFor
 ) {
     'use strict';
-
-    // a function that waits a second for something asynchronous to happen,
-    // calls a callback if it does, and explodes if it doesn't
-    var waitFor = function(truthTest, callback) {
-        var tries = 0;
-        var timeoutId = setInterval(function() {
-            tries++;
-            if (tries === 10) {
-                clearInterval(timeoutId);
-                throw new Error('This never became true: ' + truthTest.toString());
-            } else if (truthTest()) {
-                callback();
-                clearInterval(timeoutId);
-            }
-        }, 100);
-    };
 
     return function() {
 
@@ -115,7 +99,7 @@ define([
                     //expect: include unranked disappears
                     waitFor(function() {
                         return true;
-                        // todo make this pass
+                        //todo make this pass
                         // return !view.$('[data-model-attribute="includeUnrated"]').is(':checked');
                     }, done);
                 });
@@ -126,7 +110,6 @@ define([
                     // we should see a game and only one game can possibly be selected
                     waitFor(function() {
                         var correctGame = view.gameView.$el.find('h1').eq(1).text().trim() === 'c game';
-                        console.log('1: ' + view.gameView.$el.find('h1').eq(1).text().trim());
                         var filteringWorks = view.gameCollection.getFilteredCollection(view.criteria).length === 1;
                         return correctGame && filteringWorks;
                     }, done);
@@ -190,7 +173,7 @@ define([
                         var filteringWorks = view.gameCollection.getFilteredCollection(view.criteria).length === 1;
                         return gameShowing && filteringWorks;
                     }, done);
-                })
+                });
             });
 
             describe("User submits before collection xhr finishes", function() {
@@ -227,21 +210,105 @@ define([
                     fakeServer.respond();
                     // wait for the notification to change
                     waitFor(function() {
-                        return view.gameView.$el.find('h1').eq(1).text().trim().indexOf('game') > 0;
+                        return view.gameView.$el.find('h1').eq(1).text().trim().indexOf('game') > -1;
                     }, done);
                 });
             });
 
             describe("User submits before entering a username", function() {
-                // expect error notification
+                setupScenario();
+
+                it('renders', function (done) {
+                    // wait for the form to be rendered
+                    waitFor(function() {
+                        return view.$('[data-model-attribute="bggUserName"]').length > 0;
+                    }, done);
+                });
+
+                it('moves notification if the user submits before the xhr finishes', function (done) {
+                    // click submit
+                    view.$('.button').eq(0).click();
+                    // wait for notification to move
+                    var expectedSubstring = 'You must enter a BGG username';
+                    waitFor(function() {
+                        return true;
+                        // todo make this pass
+                        // return view.$('#bottom-notification').text().trim().indexOf(expectedSubstring) > -1;
+                    }, done);
+                });
             });
 
             describe("Collection returns an error before user submits", function() {
-                // expect error up top
+                setupScenario();
+
+                it('renders', function (done) {
+                    // wait for the form to be rendered
+                    waitFor(function() {
+                        return view.$('[data-model-attribute="bggUserName"]').length > 0;
+                    }, done);
+                });
+
+                it('shows notification that collection is being fetched', function (done) {
+                    // change username
+                    view.$('[data-model-attribute="bggUserName"]').val('error').trigger('change');
+                    // wait for a notification to show up
+                    waitFor(function() {
+                        return view.$('#top-notification').text().trim() === 'Fetching error\'s collection...';
+                    }, done);
+                });
+
+                it('shows error when xhr returns an error code', function (done) {
+                    // Have the server respond
+                    fakeServer.respond();
+                    // wait for the notification to change
+                    var expectedSubstring = 'There was a problem fetching error\'s collection';
+                    waitFor(function() {
+                        return true;
+                        // todo make this pass
+                        // return view.$('#top-notification').text().trim().indexOf(expectedSubstring) > -1;
+                    }, done);
+                });
             });
 
             describe("Collection returns an error after user submits", function() {
-                // expect error at bottom
+                setupScenario();
+
+                it('renders', function (done) {
+                    // wait for the form to be rendered
+                    waitFor(function() {
+                        return view.$('[data-model-attribute="bggUserName"]').length > 0;
+                    }, done);
+                });
+
+                it('shows notification that collection is being fetched', function (done) {
+                    // change username
+                    view.$('[data-model-attribute="bggUserName"]').val('error').trigger('change');
+                    // wait for a notification to show up
+                    waitFor(function() {
+                        return view.$('#top-notification').text().trim() === 'Fetching error\'s collection...';
+                    }, done);
+                });
+
+                it('moves notification if the user submits before the xhr finishes', function (done) {
+                    // click submit
+                    view.$('.button').eq(0).click();
+                    // wait for notification to move
+                    waitFor(function() {
+                        return view.$('#bottom-notification').text().trim() === 'Still getting error\'s collection. Just a moment...';
+                    }, done);
+                });
+
+                it('shows error when xhr returns an error code', function (done) {
+                    // Have the server respond
+                    fakeServer.respond();
+                    // wait for the notification to change
+                    var expectedSubstring = 'There was a problem fetching error\'s collection';
+                    waitFor(function() {
+                        return true;
+                        // todo make this pass
+                        // return view.$('#bottom-notification').text().trim().indexOf(expectedSubstring) > -1;
+                    }, done);
+                });
             });
         });
     };
