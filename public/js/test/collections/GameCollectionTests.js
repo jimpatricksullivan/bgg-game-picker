@@ -3,7 +3,7 @@ define([
     'underscore',
     'mocha',
     'chai',
-    'Models/CriteriaModel',
+    'models/CriteriaModel',
     'collections/GameCollection'
 ], function (_, Mocha, Chai, CriteriaModel, GameCollection) {
     'use strict';
