@@ -164,7 +164,7 @@ define([
                 });
 
                 it('shows a new game from a new user\'s collection', function (done) {
-                    Chai.expect($('#gameModal').hasClass('open')).to.not.be.ok();
+                    Chai.expect($('#gameModal').hasClass('open')).to.not.be.ok;
                     // submit
                     view.$('.button').eq(0).click();
                     // We should see a different game
@@ -205,7 +205,7 @@ define([
                 });
 
                 it('shows game as soon as xhr finishes', function (done) {
-                    Chai.expect($('#gameModal').hasClass('open')).to.not.be.ok();
+                    Chai.expect($('#gameModal').hasClass('open')).to.not.be.ok;
                     // Have the server respond
                     fakeServer.respond();
                     // wait for the notification to change

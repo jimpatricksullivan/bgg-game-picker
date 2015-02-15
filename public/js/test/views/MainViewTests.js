@@ -15,11 +15,11 @@ define([
             });
 
             it("can be initialized", function() {
-                Chai.expect(view.criteria).to.be.ok();
-                Chai.expect(view.gameCollection).to.be.ok();
-                Chai.expect(view.headerView).to.be.ok();
-                Chai.expect(view.gameView).to.be.ok();
-                Chai.expect(view.formView).to.be.ok();
+                Chai.expect(view.criteria).to.be.ok;
+                Chai.expect(view.gameCollection).to.be.ok;
+                Chai.expect(view.headerView).to.be.ok;
+                Chai.expect(view.gameView).to.be.ok;
+                Chai.expect(view.formView).to.be.ok;
                 Chai.expect(view.formView.model).to.eql(view.criteria);
                 Chai.expect(view.formView.gameCollection).to.eql(view.gameCollection);
             });
@@ -36,7 +36,7 @@ define([
                 Chai.expect(fakeJqueryElement.foundation.getCall(0).args).to.eql(['reveal', 'close']);
                 Chai.expect(fakeJqueryElement.foundation.getCall(1).args).to.eql(['reveal', 'open']);
                 Chai.expect(view.gameView.model).to.eql('fake game model');
-                Chai.expect(view.gameView.render.called).to.be.ok();
+                Chai.expect(view.gameView.render.called).to.be.ok;
             });
         });
     };
