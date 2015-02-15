@@ -1,9 +1,11 @@
+/*global require, module */
 var _ = require('underscore');
 var request = require('co-request').defaults({ jar: true });
 var when = require('when');
 var thunkify = require('thunkify');
 var parseString = thunkify(require('xml2js').parseString);
 
+// todo Filter out expansions. This might involve fetching more details about each game :P
 module.exports = {
 
     getGameCollection: function* (username) {

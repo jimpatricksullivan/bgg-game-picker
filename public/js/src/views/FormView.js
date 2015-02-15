@@ -36,6 +36,7 @@ define([
                 this._setupNotification();
             }
             this._updateNotification(this.notificationView.model.get('state'));
+            this.listenTo(this.model, 'change:minRating', this._excludeUnranked);
         },
 
         _submit: _.debounce(function() {
@@ -50,7 +51,7 @@ define([
                     self._updateNotification();
                 });
             } else {
-                //todo show error about no username being entered yet
+                this._updateNotification(NotificationModel.states.ENTER_USERNAME);
             }
         }, 200),
 
@@ -97,6 +98,10 @@ define([
                 this.notificationView.updateState(state, this.model.get('bggUserName'));
                 this.notificationView.render();
             }
+        },
+
+        _excludeUnranked: function() {
+            this.$('[data-model-attribute="includeUnrated"]').prop('checked', false);
         }
     });
 });

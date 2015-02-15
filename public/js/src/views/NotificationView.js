@@ -6,7 +6,8 @@ define([
     'hbs!templates/notifications/error',
     'hbs!templates/notifications/fetching',
     'hbs!templates/notifications/initial',
-    'hbs!templates/notifications/stillFetching'
+    'hbs!templates/notifications/stillFetching',
+    'hbs!templates/notifications/enterUsername'
 ], function (
     Marionette,
     NotificationModel,
@@ -14,7 +15,8 @@ define([
     errorTemplate,
     fetchingTemplate,
     initialTemplate,
-    stillFetchingTemplate
+    stillFetchingTemplate,
+    enterUsernameTemplate
 ) {
     "use strict";
 
@@ -24,6 +26,7 @@ define([
     statesToTemplates[NotificationModel.states.FETCHING] = fetchingTemplate;
     statesToTemplates[NotificationModel.states.INITIAL] = initialTemplate;
     statesToTemplates[NotificationModel.states.STILL_FETCHING] = stillFetchingTemplate;
+    statesToTemplates[NotificationModel.states.ENTER_USERNAME] = enterUsernameTemplate;
 
     return Marionette.ItemView.extend({
         template: initialTemplate,

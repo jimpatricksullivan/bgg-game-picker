@@ -98,9 +98,7 @@ define([
                     view.$('[data-model-attribute="minRating"]').val('8').trigger('change');
                     //expect: include unranked disappears
                     waitFor(function() {
-                        return true;
-                        //todo make this pass
-                        // return !view.$('[data-model-attribute="includeUnrated"]').is(':checked');
+                        return !view.$('[data-model-attribute="includeUnrated"]').is(':checked');
                     }, done);
                 });
 
@@ -231,9 +229,7 @@ define([
                     // wait for notification to move
                     var expectedSubstring = 'You must enter a BGG username';
                     waitFor(function() {
-                        return true;
-                        // todo make this pass
-                        // return view.$('#bottom-notification').text().trim().indexOf(expectedSubstring) > -1;
+                        return view.$('#top-notification').text().trim().indexOf(expectedSubstring) > -1;
                     }, done);
                 });
             });

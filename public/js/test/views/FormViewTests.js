@@ -1,4 +1,4 @@
-/*global define, require, describe, beforeEach, it */
+/*global define, require, describe, beforeEach, it, sinon */
 define([
     'jquery',
     'chai',
@@ -92,8 +92,12 @@ define([
                 });
             });
 
-            it('shows error when submitted before username entered', function() {
-                //todo
+            it('shows error when submitted before username entered', function(done) {
+                view.onRender();
+                view._submit();
+                waitFor(function() {
+                    return view.notificationView.model.get('state') === NotificationModel.states.ENTER_USERNAME;
+                }, done);
             });
         });
     };

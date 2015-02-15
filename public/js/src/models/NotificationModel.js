@@ -10,7 +10,8 @@ define([
             ERROR: 'error',
             FETCHING: 'fetching',
             INITIAL: 'initial',
-            STILL_FETCHING: 'still'
+            STILL_FETCHING: 'still',
+            ENTER_USERNAME: 'username'
         }
-    })
+    });
 });
