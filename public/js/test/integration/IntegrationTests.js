@@ -257,11 +257,9 @@ define([
                     // Have the server respond
                     fakeServer.respond();
                     // wait for the notification to change
-                    var expectedSubstring = 'There was a problem fetching error\'s collection';
+                    var expectedSubstring = 'Unable to fetch error\'s collection';
                     waitFor(function() {
-                        return true;
-                        // todo make this pass
-                        // return view.$('#top-notification').text().trim().indexOf(expectedSubstring) > -1;
+                        return view.$('#top-notification').text().trim().indexOf(expectedSubstring) > -1;
                     }, done);
                 });
             });
@@ -298,11 +296,9 @@ define([
                     // Have the server respond
                     fakeServer.respond();
                     // wait for the notification to change
-                    var expectedSubstring = 'There was a problem fetching error\'s collection';
+                    var expectedSubstring = 'Unable to fetch error\'s collection';
                     waitFor(function() {
-                        return true;
-                        // todo make this pass
-                        // return view.$('#bottom-notification').text().trim().indexOf(expectedSubstring) > -1;
+                        return view.$('#top-notification').text().trim().indexOf(expectedSubstring) > -1;
                     }, done);
                 });
             });

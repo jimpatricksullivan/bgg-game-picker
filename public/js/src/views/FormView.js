@@ -59,9 +59,14 @@ define([
             var self = this;
             this.gameCollection.bggUserName = this.model.get('bggUserName');
             this.gameCollectionFetchPromise = this.gameCollection.fetch();
-            this.gameCollectionFetchPromise.then(function() {
-                self._updateNotification(NotificationModel.states.DONE_FETCHING);
-            });
+            this.gameCollectionFetchPromise.then(
+                function() {
+                    self._updateNotification(NotificationModel.states.DONE_FETCHING);
+                },
+                function() {
+                    self._updateNotification(NotificationModel.states.ERROR);
+                }
+            );
             this._updateNotification(NotificationModel.states.FETCHING);
         },100),
 
@@ -102,6 +107,7 @@ define([
 
         _excludeUnranked: function() {
             this.$('[data-model-attribute="includeUnrated"]').prop('checked', false);
+            this.model.set('includeUnrated', false);
         }
     });
 });
