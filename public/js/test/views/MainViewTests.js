@@ -1,9 +1,10 @@
-/*global define, require, describe, beforeEach, it */
+/*global define, require, describe, beforeEach, it, sinon */
 define([
+    'jquery',
     'mocha',
     'chai',
     'views/MainView'
-], function (Mocha, Chai, MainView) {
+], function ($, Mocha, Chai, MainView) {
     'use strict';
 
     return function() {
@@ -12,31 +13,27 @@ define([
 
             beforeEach(function() {
                 view = new MainView();
+                view.render();
             });
 
             it("can be initialized", function() {
                 Chai.expect(view.criteria).to.be.ok;
                 Chai.expect(view.gameCollection).to.be.ok;
                 Chai.expect(view.headerView).to.be.ok;
-                Chai.expect(view.gameView).to.be.ok;
                 Chai.expect(view.formView).to.be.ok;
                 Chai.expect(view.formView.model).to.eql(view.criteria);
                 Chai.expect(view.formView.gameCollection).to.eql(view.gameCollection);
             });
 
-            it("can pick a random game", function() {
+            it("shows games", function() {
                 var sandbox = sinon.sandbox.create();
-                var fakeJqueryElement = { foundation: sandbox.stub() };
-                sandbox.stub(view, '$').returns(fakeJqueryElement);
-                sandbox.stub(view.gameCollection, 'getRandomGameForCriteria').returns('fake game model');
-                sandbox.stub(view.gameView, 'render');
+                sandbox.stub(view.gameCollection, 'getFilteredCollection').returns([{id: 11}]);
+                sandbox.stub($.prototype, 'foundation');
+                view._revealGames();
 
-                view.revealRandomGame();
+                Chai.expect(view.games.currentView.collection.at(0).id).to.equal(11);
 
-                Chai.expect(fakeJqueryElement.foundation.getCall(0).args).to.eql(['reveal', 'close']);
-                Chai.expect(fakeJqueryElement.foundation.getCall(1).args).to.eql(['reveal', 'open']);
-                Chai.expect(view.gameView.model).to.eql('fake game model');
-                Chai.expect(view.gameView.render.called).to.be.ok;
+                sandbox.restore();
             });
         });
     };
