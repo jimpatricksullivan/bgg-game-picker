@@ -1,3 +1,4 @@
+var path = require("path");
 var koa = require('koa');
 var logger = require('koa-logger');
 var route = require('koa-route');
@@ -7,7 +8,9 @@ var bggApiUtil = require('./BggApiUtil.js');
 var app = koa();
 app.use(logger());
 
-app.use(serveStatic(__dirname + '/public/'));
+var publicDirectory = path.join(__dirname, '..', 'public');
+app.use(serveStatic(publicDirectory));
+console.log('serving static from ' + publicDirectory);
 
 app.use(route.get('/users/:name/games', function *(username) {
     var apiResponse = yield bggApiUtil.getGameCollection(username);

@@ -1,7 +1,7 @@
 /*global define */
 define([
     'marionette',
-    'models/NotificationModel',
+    '../models/NotificationModel',
     'hbs!templates/notifications/doneFetching',
     'hbs!templates/notifications/error',
     'hbs!templates/notifications/fetching',
