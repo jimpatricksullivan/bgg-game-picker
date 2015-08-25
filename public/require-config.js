@@ -1,37 +1,39 @@
 var require = {
+    baseUrl: '/src/',
+
     paths: {
-        handlebars: '../../bower_components/handlebars/handlebars',
-        text: '../../bower_components/text/text',
-        underscore: '../../bower_components/underscore/underscore',
-        backbone: '../../bower_components/backbone/backbone',
-        marionette: '../../bower_components/backbone.marionette/lib/backbone.marionette',
-        jquery: '../../bower_components/jquery/dist/jquery',
-        localStorage: '../../bower_components/backbone.localStorage/backbone.localStorage',
-        mocha: '../../bower_components/mocha/mocha',
-        chai: '../../bower_components/chai/chai',
-        "backbone.radio": "../../bower_components/backbone.radio/build/backbone.radio",
-        when: '../../bower_components/when/when',
+        handlebars: '../bower_components/handlebars/handlebars',
+        text: '../bower_components/text/text',
+        underscore: '../bower_components/underscore/underscore',
+        backbone: '../bower_components/backbone/backbone',
+        marionette: '../bower_components/backbone.marionette/lib/backbone.marionette',
+        jquery: '../bower_components/jquery/dist/jquery',
+        localStorage: '../bower_components/backbone.localStorage/backbone.localStorage',
+        mocha: '../bower_components/mocha/mocha',
+        chai: '../bower_components/chai/chai',
+        "backbone.radio": "../bower_components/backbone.radio/build/backbone.radio",
+        when: '../bower_components/when/when',
 
         /* Foundation */
-        'foundation.core': '../../bower_components/foundation/js/foundation/foundation',
-        'foundation.abide': '../../bower_components/foundation/js/foundation/foundation.abide',
-        'foundation.accordion': '../../bower_components/foundation/js/foundation/foundation.accordion',
-        'foundation.alert': '../../bower_components/foundation/js/foundation/foundation.alert',
-        'foundation.clearing': '../../bower_components/foundation/js/foundation/foundation.clearing',
-        'foundation.dropdown': '../../bower_components/foundation/js/foundation/foundation.dropdown',
-        'foundation.equalizer': '../../bower_components/foundation/js/foundation/foundation.equalizer',
-        'foundation.interchange': '../../bower_components/foundation/js/foundation/foundation.interchange',
-        'foundation.joyride': '../../bower_components/foundation/js/foundation/foundation.joyride',
-        'foundation.magellan': '../../bower_components/foundation/js/foundation/foundation.magellan',
-        'foundation.offcanvas': '../../bower_components/foundation/js/foundation/foundation.offcanvas',
-        'foundation.orbit': '../../bower_components/foundation/js/foundation/foundation.orbit',
-        'foundation.reveal': '../../bower_components/foundation/js/foundation/foundation.reveal',
-        'foundation.tab': '../../bower_components/foundation/js/foundation/foundation.tab',
-        'foundation.tooltip': '../../bower_components/foundation/js/foundation/foundation.tooltip',
-        'foundation.topbar': '../../bower_components/foundation/js/foundation/foundation.topbar',
-        'fastclick': '../../bower_components/foundation/js/vendor/fastclick',
-        'modernizr': '../../bower_components/foundation/js/vendor/modernizr',
-        'placeholder': '../../bower_components/foundation/js/vendor/placeholder'
+        'foundation.core': '../bower_components/foundation/js/foundation/foundation',
+        'foundation.abide': '../bower_components/foundation/js/foundation/foundation.abide',
+        'foundation.accordion': '../bower_components/foundation/js/foundation/foundation.accordion',
+        'foundation.alert': '../bower_components/foundation/js/foundation/foundation.alert',
+        'foundation.clearing': '../bower_components/foundation/js/foundation/foundation.clearing',
+        'foundation.dropdown': '../bower_components/foundation/js/foundation/foundation.dropdown',
+        'foundation.equalizer': '../bower_components/foundation/js/foundation/foundation.equalizer',
+        'foundation.interchange': '../bower_components/foundation/js/foundation/foundation.interchange',
+        'foundation.joyride': '../bower_components/foundation/js/foundation/foundation.joyride',
+        'foundation.magellan': '../bower_components/foundation/js/foundation/foundation.magellan',
+        'foundation.offcanvas': '../bower_components/foundation/js/foundation/foundation.offcanvas',
+        'foundation.orbit': '../bower_components/foundation/js/foundation/foundation.orbit',
+        'foundation.reveal': '../bower_components/foundation/js/foundation/foundation.reveal',
+        'foundation.tab': '../bower_components/foundation/js/foundation/foundation.tab',
+        'foundation.tooltip': '../bower_components/foundation/js/foundation/foundation.tooltip',
+        'foundation.topbar': '../bower_components/foundation/js/foundation/foundation.topbar',
+        'fastclick': '../bower_components/foundation/js/vendor/fastclick',
+        'modernizr': '../bower_components/foundation/js/vendor/modernizr',
+        'placeholder': '../bower_components/foundation/js/vendor/placeholder'
     },
 
     shim: {
@@ -169,11 +171,11 @@ var require = {
     packages: [
         {
             name: 'hbs',
-            location: '../../bower_components/requirejs-hbs',
+            location: '../bower_components/requirejs-hbs',
             main: 'hbs'
         }, {
             name: 'when',
-            location: '../../bower_components/when',
+            location: '../bower_components/when',
             main: 'when'
         }
     ],
