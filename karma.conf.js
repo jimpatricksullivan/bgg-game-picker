@@ -18,6 +18,7 @@ module.exports = function(config) {
       {pattern: 'public/bower_components/**', included: false},
       {pattern: 'public/spec/waitFor.js', included: false},
       {pattern: 'public/src/**/*.js', included: false},
+      {pattern: 'public/src/**/*.hbs', included: false},
       {pattern: 'public/spec/**/*.spec.js', included: false},
       'public/spec/test-main.js'
     ],
