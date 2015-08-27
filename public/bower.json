@@ -2,6 +2,7 @@
     "name": "bgg-game-picker",
     "version": "0.0.1",
     "dependencies": {
+        "underscore": "1.8.3",
         "text": null,
         "handlebars": null,
         "requirejs": "~2.1.6",
@@ -13,5 +14,8 @@
         "chai": null,
         "backbone.radio": null,
         "when": null
+    },
+    "resolutions": {
+        "underscore": "1.8.3"
     }
 }
