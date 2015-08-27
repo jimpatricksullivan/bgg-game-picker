@@ -6,12 +6,12 @@ div.hidden {
     display:none;
 }
 
-div.three-quarters.boxy {
-    width: 15px;
-    height: 15px;
-    border: 5px solid #FFFFFF;
-    border-radius: 0;
-    margin: 2px 10px 2px 2px;
+div.spinner {
+    background: url('/css/spinner.gif') no-repeat center;
+    height: 16px;
+    width: 16px;
+    float: left;
+    margin-right: 10px;
 }
 
 select {
