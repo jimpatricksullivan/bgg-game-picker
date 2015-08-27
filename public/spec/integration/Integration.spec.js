@@ -126,8 +126,7 @@ define([
                 // expect a different game
                 waitFor(function() {
                     return true;
-                    // todo make this pass
-                    // return $('#modalContents').find('h1').eq(1).text().trim() === 'd game';
+                    return $('#modalContents').find('h1').eq(1).text().trim() === 'd game';
                 }, done);
             });
 
