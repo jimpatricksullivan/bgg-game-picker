@@ -36,7 +36,7 @@ define([
                 this._setupNotification();
             }
             this._updateNotification(this.notificationView.model.get('state'));
-            this.listenTo(this.model, 'change:minRating', this._excludeUnranked);
+            this.listenTo(this.model, 'change:minRating', this._excludeUnrated);
         },
 
         _submit: _.debounce(function() {
@@ -105,7 +105,7 @@ define([
             }
         },
 
-        _excludeUnranked: function() {
+        _excludeUnrated: function() {
             this.$('[data-model-attribute="includeUnrated"]').prop('checked', false);
             this.model.set('includeUnrated', false);
         }

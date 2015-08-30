@@ -98,7 +98,7 @@ define([
                 view.$('[data-model-attribute="maxTime"]').val('120').trigger('change');
                 view.$('[data-model-attribute="numberOfPlayers"]').val('4').trigger('change');
                 view.$('[data-model-attribute="minRating"]').val('8').trigger('change');
-                //expect: include unranked disappears
+                //expect: include unrated disappears
                 waitFor(function() {
                     return !view.$('[data-model-attribute="includeUnrated"]').is(':checked');
                 }, done);

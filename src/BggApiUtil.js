@@ -5,19 +5,18 @@ var when = require('when');
 var thunkify = require('thunkify');
 var parseString = thunkify(require('xml2js').parseString);
 
-// todo Filter out expansions. This might involve fetching more details about each game :P
 module.exports = {
 
     getGameCollection: function* (username) {
         var opt = {
-            url: 'http://boardgamegeek.com/xmlapi2/collection?own=1&stats=1&username=' + username,
+            url: 'http://boardgamegeek.com/xmlapi2/collection?own=1&excludesubtype=boardgameexpansion&stats=1&username=' + username,
             method: "GET"
         };
         var statusCode = 0;
         var tries = 0;
         while (statusCode !== 200 && tries <= 10) {
             if (tries !== 0) {
-                yield this._pauseBetweenTries();
+                yield this._pause();
             }
             var response = yield request(opt);
             statusCode = response.statusCode;
@@ -51,7 +50,7 @@ module.exports = {
         return parsedObjects;
     },
 
-    _pauseBetweenTries: function() {
+    _pause: function() {
         var deferred = when.defer();
         setTimeout(function() {
             deferred.resolve( );
