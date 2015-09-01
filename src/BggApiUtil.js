@@ -6,6 +6,7 @@ var thunkify = require('thunkify');
 var parseString = thunkify(require('xml2js').parseString);
 
 module.exports = {
+    _request: request, // for testability
 
     getGameCollection: function* (username) {
         var opt = {
@@ -18,7 +19,7 @@ module.exports = {
             if (tries !== 0) {
                 yield this._pause();
             }
-            var response = yield request(opt);
+            var response = yield this._request(opt);
             statusCode = response.statusCode;
             tries++;
         }

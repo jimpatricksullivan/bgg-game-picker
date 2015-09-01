@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var mocha = require('gulp-mocha');
+var mocha = require('gulp-mocha-co');
 var karma = require('karma').server;
 var bower = require('gulp-bower');
 gulp.task('bower', function() {
