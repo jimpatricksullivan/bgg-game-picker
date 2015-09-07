@@ -77,6 +77,7 @@ define([
 
         // factored out mainly to make testing easier
         _revealGameByIndex: function(index) {
+            window.scrollTo(0, 0);
             this.$('#game-' + index).foundation('reveal', 'open');
         }
     });

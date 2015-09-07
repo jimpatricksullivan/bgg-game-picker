@@ -37,6 +37,12 @@ img {
 .top-bar ul h1 a {
     font-size: xx-large;
     font-weight: bold;
-
+    width:100% !important; /* overriding some Foundation css */
     color:#000000;
+}
+
+@media only screen and (max-width: 550px) {
+    .top-bar ul h1 a {
+        font-size: x-large;
+    }
 }
