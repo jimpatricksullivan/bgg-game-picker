@@ -9,17 +9,20 @@ define([
     return Marionette.ItemView.extend({
         template: template,
 
-        ui: {
-            pickAnotherButton: '.pick'
+        onRender: function() {
+            // Set up an event listener. Not doing this with standard Backbone/Marionette events because Foundation
+            // likes to move things around in the DOM.
+            this.pickAnotherButton = this.$('#modalContents').find('.pick');
+            this.pickAnotherButton.on( "click", _.bind(this._pickAnotherGame, this));
         },
 
-        events: {
-            "click @ui.pickAnotherButton": "_pickAnotherGame"
+        onDestroy: function() {
+            this.pickAnotherButton.off('click');
         },
 
         _pickAnotherGame: function() {
             var channel = Radio.channel('app');
-            channel.trigger("revealGame");
+            channel.trigger("revealAnotherGame");
         },
 
         serializeData: function() {

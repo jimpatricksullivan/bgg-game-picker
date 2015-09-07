@@ -1,18 +1,35 @@
-/*global define, require, describe, beforeEach, it, sinon */
+/*global define, require, describe, beforeEach, it, sinon, afterEach */
 define([
     'jquery',
     'mocha',
     'chai',
+    'backbone.radio',
     'views/MainView'
-], function ($, Mocha, Chai, MainView) {
+], function ($, Mocha, Chai, Radio, MainView) {
     'use strict';
 
     describe("MainView", function () {
-        var view;
+        var view,
+            sandbox,
+            channel,
+            revealStub;
 
         beforeEach(function() {
+            sandbox = sinon.sandbox.create();
+            channel = Radio.channel('app');
+
             view = new MainView();
+            revealStub = sandbox.stub(view, '_revealGameByIndex');
+            sandbox.stub(view.gameCollection, 'getFilteredCollection').returns([
+                {id: 1},
+                {id: 2}
+            ]);
+
             view.render();
+        });
+
+        afterEach(function() {
+            sandbox.restore();
         });
 
         it("can be initialized", function() {
@@ -25,14 +42,11 @@ define([
         });
 
         it("shows games", function() {
-            var sandbox = sinon.sandbox.create();
-            sandbox.stub(view.gameCollection, 'getFilteredCollection').returns([{id: 11}]);
-            sandbox.stub($.prototype, 'foundation');
-            view._revealGames();
-
-            Chai.expect(view.games.currentView.collection.at(0).id).to.equal(11);
-
-            sandbox.restore();
+            view._revealGame();
+            Chai.expect(revealStub.withArgs(0).called).to.equal(true);
+            Chai.expect(revealStub.withArgs(1).called).to.equal(false);
+            view._revealAnotherGame();
+            Chai.expect(revealStub.withArgs(1).called).to.equal(true);
         });
     });
 });

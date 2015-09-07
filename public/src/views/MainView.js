@@ -23,8 +23,7 @@ define([
             this._setupModels();
             this._setUpViews();
             this._setupRegions();
-            var channel = Radio.channel('app');
-            channel.on('revealGame', _.bind(this._revealGames, this));
+            this._setupGameRevealListeners();
         },
 
         _setupModels: function() {
@@ -48,20 +47,37 @@ define([
             });
         },
 
+        _setupGameRevealListeners: function () {
+            var channel = Radio.channel('app');
+            channel.on('revealGame', _.bind(this._revealGame, this));
+            channel.on('revealAnotherGame', _.bind(this._revealAnotherGame, this));
+        },
+
         onShow: function () {
             this.header.show(this.headerView);
             this.body.show(this.formView);
             $(document).foundation();
         },
 
-        _revealGames: function() {
+        _revealGame: function() {
             var games = _.shuffle(this.gameCollection.getFilteredCollection(this.criteria));
             this.gameCollectionView = new GameCollectionView({
                 collection: new GameCollection(games)
             });
             this.games.show(this.gameCollectionView);
             $(document).foundation();
-            $('#game-0').foundation('reveal', 'open');
+            this.currentGameIndex = 0;
+            this._revealGameByIndex(this.currentGameIndex);
+        },
+
+        _revealAnotherGame: function() {
+            this.currentGameIndex++;
+            this._revealGameByIndex(this.currentGameIndex);
+        },
+
+        // factored out mainly to make testing easier
+        _revealGameByIndex: function(index) {
+            this.$('#game-' + index).foundation('reveal', 'open');
         }
     });
 });
