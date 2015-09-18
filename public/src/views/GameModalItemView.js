@@ -3,7 +3,7 @@
 define([
     'marionette',
     'backbone.radio',
-    'hbs!templates/game'
+    'hbs!templates/gameModalItem'
 ], function (Marionette, Radio, template) {
 
     return Marionette.ItemView.extend({

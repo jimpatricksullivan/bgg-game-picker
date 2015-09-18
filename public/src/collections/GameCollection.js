@@ -23,12 +23,6 @@ define([
                     (!criteria.get('minRating') || game.higherUserRatingThan(criteria.get('minRating'))) &&
                     (criteria.get('includeUnrated') || game.hasUserRating());
             });
-        },
-
-        getRandomGameForCriteria: function(criteria) {
-            var filteredCollection = this.getFilteredCollection(criteria || {});
-            var randomGameIndex = _.random(0, filteredCollection.length - 1);
-            return filteredCollection[randomGameIndex];
         }
 
     })

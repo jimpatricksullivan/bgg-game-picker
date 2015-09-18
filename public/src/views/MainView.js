@@ -9,11 +9,20 @@ define([
     'models/CriteriaModel',
     'views/HeaderView',
     'views/FormView',
-    'views/GameCollectionView',
+    'views/GameModalsCollectionView',
     'hbs!templates/main',
     'foundation.reveal'
 ], function (
-    $, _, Marionette, Radio, GameCollection, CriteriaModel, HeaderView, FormView, GameCollectionView, template
+    $,
+    _,
+    Marionette,
+    Radio,
+    GameCollection,
+    CriteriaModel,
+    HeaderView,
+    FormView,
+    GameModalsCollectionView,
+    template
 ) {
 
     return Marionette.LayoutView.extend({
@@ -61,7 +70,7 @@ define([
 
         _revealGame: function() {
             var games = _.shuffle(this.gameCollection.getFilteredCollection(this.criteria));
-            this.gameCollectionView = new GameCollectionView({
+            this.gameCollectionView = new GameModalsCollectionView({
                 collection: new GameCollection(games)
             });
             this.games.show(this.gameCollectionView);

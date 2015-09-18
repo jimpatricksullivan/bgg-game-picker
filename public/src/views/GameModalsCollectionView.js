@@ -2,11 +2,11 @@
 
 define([
     'marionette',
-    'views/GameView'
-], function (Marionette, GameView) {
+    'views/GameModalItemView'
+], function (Marionette, GameModalItemView) {
 
     return Marionette.CollectionView.extend({
-        childView: GameView,
+        childView: GameModalItemView,
 
         initialize: function() {
             // add a last model to the collection to show a message that you've seen all the games
