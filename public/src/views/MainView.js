@@ -10,6 +10,7 @@ define([
     'views/HeaderView',
     'views/FormView',
     'views/GameModalsCollectionView',
+    'views/GameListModalView',
     'hbs!templates/main',
     'foundation.reveal'
 ], function (
@@ -22,6 +23,7 @@ define([
     HeaderView,
     FormView,
     GameModalsCollectionView,
+    GameListModalView,
     template
 ) {
 
@@ -70,24 +72,33 @@ define([
 
         _revealGame: function() {
             var games = _.shuffle(this.gameCollection.getFilteredCollection(this.criteria));
-            this.gameCollectionView = new GameModalsCollectionView({
-                collection: new GameCollection(games)
-            });
-            this.games.show(this.gameCollectionView);
-            $(document).foundation();
+            this._showCollectionView(games, GameModalsCollectionView);
             this.currentGameIndex = 0;
-            this._revealGameByIndex(this.currentGameIndex);
+            this._revealModal('#game-' + this.currentGameIndex);
         },
 
         _revealAnotherGame: function() {
             this.currentGameIndex++;
-            this._revealGameByIndex(this.currentGameIndex);
+            this._revealModal('#game-' + this.currentGameIndex);
         },
 
-        // factored out mainly to make testing easier
-        _revealGameByIndex: function(index) {
+        _revealGamesList: function() {
+            var games = this.gameCollection.getFilteredCollection(this.criteria);
+            this._showCollectionView(games, GameListModalView);
+            this._revealModal('#game-list');
+        },
+
+        _showCollectionView: function (games, ViewClass) {
+            this.gameCollectionView = new ViewClass({
+                collection: new GameCollection(games)
+            });
+            this.games.show(this.gameCollectionView);
+            $(document).foundation();
+        },
+
+        _revealModal: function(selector) {
             window.scrollTo(0, 0);
-            this.$('#game-' + index).foundation('reveal', 'open');
+            this.$(selector).foundation('reveal', 'open');
         }
     });
 });

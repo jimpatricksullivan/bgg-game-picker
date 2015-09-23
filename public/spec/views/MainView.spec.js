@@ -19,7 +19,7 @@ define([
             channel = Radio.channel('app');
 
             view = new MainView();
-            revealStub = sandbox.stub(view, '_revealGameByIndex');
+            revealStub = sandbox.stub(view, '_revealModal');
             sandbox.stub(view.gameCollection, 'getFilteredCollection').returns([
                 {id: 1},
                 {id: 2}
@@ -41,12 +41,17 @@ define([
             Chai.expect(view.formView.gameCollection).to.eql(view.gameCollection);
         });
 
-        it("shows games", function() {
+        it("shows game modals", function() {
             view._revealGame();
-            Chai.expect(revealStub.withArgs(0).called).to.equal(true);
-            Chai.expect(revealStub.withArgs(1).called).to.equal(false);
+            Chai.expect(revealStub.withArgs('#game-0').called).to.equal(true);
+            Chai.expect(revealStub.withArgs('#game-1').called).to.equal(false);
             view._revealAnotherGame();
-            Chai.expect(revealStub.withArgs(1).called).to.equal(true);
+            Chai.expect(revealStub.withArgs('#game-1').called).to.equal(true);
+        });
+
+        it("shows game list", function() {
+            view._revealGamesList();
+            Chai.expect(revealStub.withArgs('#game-list').called).to.equal(true);
         });
     });
 });
