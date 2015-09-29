@@ -62,6 +62,7 @@ define([
             var channel = Radio.channel('app');
             channel.on('revealGame', _.bind(this._revealGame, this));
             channel.on('revealAnotherGame', _.bind(this._revealAnotherGame, this));
+            channel.on('revealList', _.bind(this._revealGamesList, this));
         },
 
         onShow: function () {

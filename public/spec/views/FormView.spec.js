@@ -71,29 +71,37 @@ define([
         it('updates notifications when submitted before fetch complete', function(done) {
             view.onRender();
             changeUsername();
-            view._submit();
+            view._onOneGameSubmit();
             waitFor(function() {
                 return view.notificationView.model.get('state') === NotificationModel.states.STILL_FETCHING;
             }, done);
         });
 
-        it('fires event when submitted after fetch complete', function(done) {
+        var testSubmit = function(submitMethod, expectedEvent, done) {
             var channel = Radio.channel('app');
-            channel.on("revealGame", done);
+            channel.on(expectedEvent, done);
 
             view.onRender();
             changeUsername();
-            view._submit();
+            view[submitMethod]();
             waitFor(function() {
                 return view.notificationView.model.get('state') === NotificationModel.states.STILL_FETCHING;
             }, function() {
                 deferred.resolve();
             });
+        };
+
+        it('fires correct event on one game submit after fetch complete', function(done) {
+            testSubmit('_onOneGameSubmit', 'revealGame', done);
+        });
+
+        it('fires correct event on game list submit after fetch complete', function(done) {
+            testSubmit('_onGameListSubmit', 'revealList', done);
         });
 
         it('shows error when submitted before username entered', function(done) {
             view.onRender();
-            view._submit();
+            view._onOneGameSubmit();
             waitFor(function() {
                 return view.notificationView.model.get('state') === NotificationModel.states.ENTER_USERNAME;
             }, done);

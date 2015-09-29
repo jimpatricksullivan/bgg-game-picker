@@ -15,13 +15,15 @@ define([
         template: template,
 
         ui: {
-            submitButton: '.button',
+            oneGameSubmit: '#pick-a-game',
+            gameListSubmit: '#choose-my-own',
             username: '[data-model-attribute="bggUserName"]',
             attributeField: '[data-model-attribute]'
         },
 
         events: {
-            "click @ui.submitButton": "_submit",
+            "click @ui.oneGameSubmit": "_onOneGameSubmit",
+            "click @ui.gameListSubmit": "_onGameListSubmit",
             "change @ui.username": "_onUsernameChange",
             "change @ui.attributeField": "_onFieldChange"
         },
@@ -39,7 +41,15 @@ define([
             this.listenTo(this.model, 'change:minRating', this._excludeUnrated);
         },
 
-        _submit: _.debounce(function() {
+        _onOneGameSubmit: function() {
+            this._submit("revealGame");
+        },
+
+        _onGameListSubmit: function() {
+            this._submit("revealList");
+        },
+
+        _submit: _.debounce(function(channelEvent) {
             var self = this;
             if (this.gameCollectionFetchPromise) {
                 if (this.gameCollectionFetchPromise.state() === 'pending') {
@@ -47,7 +57,7 @@ define([
                 }
                 this.gameCollectionFetchPromise.then(function() {
                     var channel = Radio.channel('app');
-                    channel.trigger("revealGame");
+                    channel.trigger(channelEvent);
                     self._updateNotification();
                 });
             } else {
