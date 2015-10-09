@@ -1,21 +1,23 @@
 {
-    "name": "bgg-game-picker",
-    "version": "0.0.1",
-    "dependencies": {
-        "underscore": "1.8.3",
-        "text": null,
-        "handlebars": null,
-        "requirejs": "~2.1.6",
-        "requirejs-hbs":  null,
-        "backbone.marionette": "v2.0.0-pre.2",
-        "backbone.localStorage": "~1.1.4",
-        "foundation": "~5.2.2",
-        "mocha": null,
-        "chai": null,
-        "backbone.radio": null,
-        "when": null
-    },
-    "resolutions": {
-        "underscore": "1.8.3"
-    }
+  "name": "bgg-game-picker",
+  "version": "0.0.1",
+  "dependencies": {
+    "backbone.localStorage": "~1.1.4",
+    "backbone.marionette": "v2.0.0-pre.2",
+    "backbone.radio": null,
+    "chai": null,
+    "foundation": "~5.2.2",
+    "handlebars": null,
+    "imagesloaded": "~3.1.8",
+    "masonry": "~3.3.2",
+    "mocha": null,
+    "requirejs": "~2.1.6",
+    "requirejs-hbs": null,
+    "text": null,
+    "underscore": "1.8.3",
+    "when": null
+  },
+  "resolutions": {
+    "underscore": "1.8.3"
+  }
 }

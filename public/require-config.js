@@ -13,6 +13,8 @@ var require = {
         chai: '../bower_components/chai/chai',
         "backbone.radio": "../bower_components/backbone.radio/build/backbone.radio",
         when: '../bower_components/when/when',
+        masonry: '../bower_components/masonry/dist/masonry.pkgd',
+        imagesLoaded: '../bower_components/imagesloaded/imagesloaded.pkgd',
 
         /* Foundation */
         'foundation.core': '../bower_components/foundation/js/foundation/foundation',
