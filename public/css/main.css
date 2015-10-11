@@ -46,3 +46,15 @@ img {
         font-size: x-large;
     }
 }
+
+.game-list-item {
+    margin-bottom: 15px;
+    border: solid 1px #bbbbbb;
+    padding: 10px;
+    width: 172px;
+    box-sizing: border-box;
+}
+
+.game-list-item > img {
+    width: 150px;
+}

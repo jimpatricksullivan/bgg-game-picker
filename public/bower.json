@@ -6,7 +6,7 @@
     "backbone.marionette": "v2.0.0-pre.2",
     "backbone.radio": null,
     "chai": null,
-    "foundation": "~5.2.2",
+    "foundation": "~5.5.3",
     "handlebars": null,
     "imagesloaded": "~3.1.8",
     "masonry": "~3.3.2",

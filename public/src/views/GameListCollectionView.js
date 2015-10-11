@@ -3,21 +3,18 @@ define([
     'handlebars',
     'marionette',
     'imagesLoaded',
-    'masonry'
-], function (_, Handlebars, Marionette, imagesLoaded, Masonry) {
+    'masonry',
+    'hbs!templates/gameListItem'
+], function (_, Handlebars, Marionette, imagesLoaded, Masonry, gameListItem) {
     return Marionette.ItemView.extend({
-        template: Handlebars.compile(''),
+        template: Handlebars.compile('<div></div>'),
 
-        IMAGE_LOAD_CHUNK_SIZE: 20,
+        IMAGE_LOAD_CHUNK_SIZE: 5,
 
-        onShow: function() {
-            this.masonry = new Masonry( this.$el.get(0), {
-                columnWidth: 160
-            });
-
-            var shuffledGames = this.collection.shuffle().toJSON();
+        onShow: _.debounce(function() { //TODO figure out why this debounce is necessary and fix it
+            var shuffledGames = _.shuffle(this.collection.toJSON());
             this._appendGames(shuffledGames);
-        },
+        }, 300),
 
         _appendGames: function(allGames) {
             var chunk = this._getChunkOfGames(allGames);
@@ -27,7 +24,7 @@ define([
 
             imagesLoaded(chunkElements, _.bind(function() {
                 this.$el.append(chunkElements);
-                this.masonry.appended(chunkElements);
+                this.masonry = new Masonry( this.$el.get(0), { columnWidth: 187 });
                 this._appendGames(allGames);
             }, this));
         },
@@ -38,8 +35,7 @@ define([
 
         _makeElementsFromGames(games) {
             return _.map(games, function(game) {
-                //TODO show more than just an image for each game?
-                return $('<img>').attr('src', game.thumbnail);
+                return $(gameListItem(game)).get(0);
             });
         }
     });
