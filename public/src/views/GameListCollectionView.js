@@ -11,10 +11,10 @@ define([
 
         IMAGE_LOAD_CHUNK_SIZE: 5,
 
-        onShow: _.debounce(function() { //TODO figure out why this debounce is necessary and fix it
+        onShow: function() {
             var shuffledGames = _.shuffle(this.collection.toJSON());
             this._appendGames(shuffledGames);
-        }, 300),
+        },
 
         _appendGames: function(allGames) {
             var chunk = this._getChunkOfGames(allGames);

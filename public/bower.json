@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "backbone.localStorage": "~1.1.4",
-    "backbone.marionette": "v2.0.0-pre.2",
+    "backbone.marionette": "v2.4.3",
     "backbone.radio": null,
     "chai": null,
     "foundation": "~5.5.3",
