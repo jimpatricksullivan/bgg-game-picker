@@ -99,7 +99,7 @@ define([
 
         _revealModal: function(selector) {
             window.scrollTo(0, 0);
-            this.$(selector).foundation('reveal', 'open', { animation: 'none' });
+            this.$(selector).foundation('reveal', 'open', { animation: 'fade' });
         }
     });
 });

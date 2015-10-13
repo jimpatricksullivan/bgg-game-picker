@@ -34,17 +34,8 @@ img {
     bottom: 0;
 }
 
-.top-bar ul h1 a {
-    font-size: xx-large;
-    font-weight: bold;
-    width:100% !important; /* overriding some Foundation css */
-    color:#000000;
-}
-
-@media only screen and (max-width: 550px) {
-    .top-bar ul h1 a {
-        font-size: x-large;
-    }
+#game-list>div>div {
+    margin: 0 auto;
 }
 
 .game-list-item {
@@ -57,4 +48,25 @@ img {
 
 .game-list-item > img {
     width: 150px;
+}
+
+.top-bar ul h1 a {
+    font-size: xx-large;
+    font-weight: bold;
+    width:100% !important; /* overriding some Foundation css */
+    color:#000000;
+}
+
+@media only screen and (max-width: 550px) {
+    .top-bar ul h1 a {
+        font-size: x-large;
+    }
+
+    .game-list-item {;
+        width: 132px;
+    }
+
+    .game-list-item > img {
+        width: 110px;
+    }
 }

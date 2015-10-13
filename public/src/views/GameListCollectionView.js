@@ -10,8 +10,11 @@ define([
         template: Handlebars.compile('<div></div>'),
 
         IMAGE_LOAD_CHUNK_SIZE: 5,
+        MASONRY_COLUMN_WIDTH: ($(document).width() >= 550) ? 187 : 137,
 
-        onShow: function() {
+        // Not using the standard marionette onShow because we're using an unholy union of Marionette and Foundation
+        // reveal. This stuff needs to happen after the reveal is complete.
+        showGames: function() {
             var shuffledGames = _.shuffle(this.collection.toJSON());
             this._appendGames(shuffledGames);
         },
@@ -24,7 +27,10 @@ define([
 
             imagesLoaded(chunkElements, _.bind(function() {
                 this.$el.append(chunkElements);
-                this.masonry = new Masonry( this.$el.get(0), { columnWidth: 187 });
+                this.masonry = new Masonry( this.$el.get(0), {
+                    columnWidth: this.MASONRY_COLUMN_WIDTH,
+                    isFitWidth: true
+                });
                 this._appendGames(allGames);
             }, this));
         },
