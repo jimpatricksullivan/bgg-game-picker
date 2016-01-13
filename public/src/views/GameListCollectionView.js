@@ -25,7 +25,7 @@ define([
 
             var chunkElements = this._makeElementsFromGames(chunk);
 
-            imagesLoaded(chunkElements, _.bind(function() {
+            this._imagesLoaded(chunkElements, _.bind(function() {
                 this.$el.append(chunkElements);
                 this.masonry = new Masonry( this.$el.get(0), {
                     columnWidth: this.MASONRY_COLUMN_WIDTH,
@@ -43,6 +43,9 @@ define([
             return _.map(games, function(game) {
                 return $(gameListItem(game)).get(0);
             });
-        }
+        },
+
+        // for testing
+        _imagesLoaded: imagesLoaded
     });
 });
