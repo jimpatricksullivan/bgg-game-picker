@@ -35,8 +35,8 @@ define([
                     '{"id":4, "name":"d game","yearPublished":2012, "image":"d.jpg", "thumbnail":"d_t.jpg", "minPlayers":2, "maxPlayers":2, "playingTime":60, "userRating":5, "averageRating":7}]']);
             fakeServer.respondWith("/users/jimbnyc/games",
                 [200, { "Content-Type": "application/json" },
-                    '[{"id":1, "name":"e game","yearPublished":2010, "image":"e.jpg", "thumbnail":"e_t.jpg", "minPlayers":2, "maxPlayers":7, "playingTime":30, "userRating":8, "averageRating":6},' +
-                    '{"id":4, "name":"d game","yearPublished":2013, "image":"d.jpg", "thumbnail":"d_t.jpg", "minPlayers":1, "maxPlayers":8, "playingTime":60, "userRating":7, "averageRating":4}]']);
+                    '[{"id":5, "name":"e game","yearPublished":2010, "image":"e.jpg", "thumbnail":"e_t.jpg", "minPlayers":2, "maxPlayers":7, "playingTime":30, "userRating":8, "averageRating":6},' +
+                    '{"id":6, "name":"f game","yearPublished":2013, "image":"d.jpg", "thumbnail":"d_t.jpg", "minPlayers":1, "maxPlayers":8, "playingTime":60, "userRating":7, "averageRating":4}]']);
             fakeServer.respondWith("/users/error/games",
                 [500, { "Content-Type": "application/json" }, '']);
         });
@@ -179,6 +179,26 @@ define([
                     }
                 }, done);
             });
+
+            it('shows a list of games', function(done) {
+                // change criteria and click to see a list
+                view.$('[data-model-attribute="maxTime"]').val('60').trigger('change');
+                view.$('[data-model-attribute="minRating"]').val('5').trigger('change');
+                debugger;
+                view.$('.button').eq(1).click();
+
+                // wait for game list to show up
+                waitFor(function () {
+                    if (view.$('#game-list').length) {
+                        // If the game list is showing we have to fake a foundation event that never fires because the
+                        // because the dom is hidden.
+                        view.$('#game-list').trigger('opened.fndtn.reveal');
+                    }
+                    var firstGameShowing = view.$('.game-list-item[data-game-id="5"]').length;
+                    var secondGameShowing = view.$('.game-list-item[data-game-id="6"]').length;
+                    return firstGameShowing && secondGameShowing;
+                }, done);
+            })
         });
 
         describe("User submits before collection xhr finishes", function() {
