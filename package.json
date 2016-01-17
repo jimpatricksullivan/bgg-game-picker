@@ -1,7 +1,7 @@
 {
   "name": "bgg-game-picker",
   "description": "A toy app for choosing a random game from a boardgamegeek.com game collection",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "repository": {
     "url": "https://github.com/jimpatricksullivan/bgg-game-picker"
   },
