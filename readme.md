@@ -1,11 +1,11 @@
 #BoardGameGeek Game Picker
 
-This is a WIP JavaScript application that uses the
+This is a JavaScript application that uses the
 [boardgamegeek.com api](http://boardgamegeek.com/wiki/page/BGG_XML_API) to select a random owned game in a user's
 [collection](http://boardgamegeek.com/wiki/page/collection) which meets certain criteria, such as number of
 players, maximum run time, or minimum rating. Handy when you have lots of games and can't decide what to play.
 
-To see the app in action, go here: http://immense-waters-4279.herokuapp.com/
+You can try it here: http://bgg-game-picker.herokuapp.com
 
 ##Running this app locally
 
